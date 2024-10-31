@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>YouCode | Scrum Board</title>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+  <meta content="" name="description" />
+  <meta content="" name="author" />
+
+  <!-- ================== BEGIN core-css ================== -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="assets/css/vendor.min.css" rel="stylesheet" />
+  <link href="assets/css/default/app.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+  <!-- ================== END core-css ================== -->
+
+  <style>
+    .modal {
+      display: none;
+      justify-content: center;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      background: #c6c6c6d6;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- BEGIN #app -->
+  <div id="app" class="app-without-sidebar">
+    <!-- BEGIN #content -->
+    <div id="content" class="app-content main-style">
+      <div class="d-flex align-items-center mb-3">
+        <div>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+            <li class="breadcrumb-item active">Scrum Board</li>
+          </ol>
+          <!-- BEGIN page-header -->
+          <h1 class="page-header mb-0">Scrum Board</h1>
+          <!-- END page-header -->
+        </div>
+
+        <div class="ms-auto">
+          <button type="button" id="AddTasck" class="btn btn-success btn-rounded px-4 rounded-pill">+ Add Task </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-4 col-lg-6">
+          <div class="panel panel-inverse">
+            <div class="panel-heading">
+              <h4 class="panel-title">To do (<span id="to-do-tasks-count">5</span>)</h4>
+            </div>
+            <div class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="to-do-tasks">
+              <!-- TO DO TASKS HERE -->
+              <button class="btn d-flex justify-content-center align-items-start border">
+                <div class="d-flex justify-content-center align-items-center"
+                  style="display: flex; justify-content:space-around; gap:20px;">
+                  <div class="">
+                    <i class="fa-regular fa-circle-question" style="color: #05a777;"></i>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center align-items-start">
+                    <div class="fs-6">Describe steps to reproduce an issue</div>
+                    <div class=" text d-flex flex-column justify-content-center align-items-start">
+                      <div class="text text-secondary" style="font-size: smaller;">#6 created in 2022-10-08</div>
+                      <div class="text" style="font-size: smaller;" title="including as many details as possible.">
+                        including as many details as possible.
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <span class=" btn-primary p-1 rounded" style="font-size: smaller;">High</span>
+                      <span class="btn-secondary  p-1 rounded" style="font-size: smaller;">Feature</span>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6">
+          <div class="panel panel-inverse">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                In Progress (<span id="in-progress-tasks-count">4</span>)
+              </h4>
+            </div>
+            <div class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0"
+              id="in-progress-tasks">
+              <!-- IN PROGRESS TASKS HERE -->
+              <button class="btn d-flex justify-content-center align-items-start border">
+                <div class="d-flex justify-content-center align-items-center"
+                  style="display: flex; justify-content:space-around; gap:20px;">
+                  <div class="">
+                    <i class="fa-solid fa-circle-notch" style="color: #05a777;"></i>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center align-items-start">
+                    <div class="fs-6">Describe steps to reproduce an issue</div>
+                    <div class=" text d-flex flex-column justify-content-center align-items-start">
+                      <div class="text text-secondary" style="font-size: smaller;">#6 created in 2022-10-08</div>
+                      <div class="text" style="font-size: smaller;" title="including as many details as possible.">
+                        including as many details as possible.
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <span class=" btn-primary p-1 rounded" style="font-size: smaller;">High</span>
+                      <span class="btn-secondary  p-1 rounded" style="font-size: smaller;">Feature</span>
+                    </div>
+                  </div>
+                </div>
+              </button>
+
+              <button class="btn d-flex justify-content-center align-items-start border">
+                <div class="d-flex justify-content-center align-items-center"
+                  style="display: flex; justify-content:space-around; gap:20px;">
+                  <div class="">
+                    <i class="fa-solid fa-circle-notch" style="color: #05a777;"></i>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center align-items-start">
+                    <div class="fs-6">Describe steps to reproduce an issue</div>
+                    <div class=" text d-flex flex-column justify-content-center align-items-start">
+                      <div class="text text-secondary" style="font-size: smaller;">#6 created in 2022-10-08</div>
+                      <div class="text" style="font-size: smaller;" title="including as many details as possible.">
+                        including as many details as possible.
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <span class=" btn-primary p-1 rounded" style="font-size: smaller;">High</span>
+                      <span class="btn-secondary  p-1 rounded" style="font-size: smaller;">Feature</span>
+                    </div>
+                  </div>
+                </div>
+              </button>
+              <button class="btn d-flex justify-content-center align-items-start border">
+                <div class="d-flex justify-content-center align-items-center"
+                  style="display: flex; justify-content:space-around; gap:20px;">
+                  <div class="">
+                    <i class="fa-solid fa-circle-notch" style="color: #05a777;"></i>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center align-items-start">
+                    <div class="fs-6">Describe steps to reproduce an issue</div>
+                    <div class=" text d-flex flex-column justify-content-center align-items-start">
+                      <div class="text text-secondary" style="font-size: smaller;">#6 created in 2022-10-08</div>
+                      <div class="text" style="font-size: smaller;" title="including as many details as possible.">
+                        including as many details as possible.
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <span class=" btn-primary p-1 rounded" style="font-size: smaller;">High</span>
+                      <span class="btn-secondary  p-1 rounded" style="font-size: smaller;">Feature</span>
+                    </div>
+                  </div>
+                </div>
+              </button>
+              <button class="btn d-flex justify-content-center align-items-start border">
+                <div class="d-flex justify-content-center align-items-center"
+                  style="display: flex; justify-content:space-around; gap:20px;">
+                  <div class="">
+                    <i class="fa-solid fa-circle-notch" style="color: #05a777;"></i>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center align-items-start">
+                    <div class="fs-6">Describe steps to reproduce an issue</div>
+                    <div class=" text d-flex flex-column justify-content-center align-items-start">
+                      <div class="text text-secondary" style="font-size: smaller;">#6 created in 2022-10-08</div>
+                      <div class="text" style="font-size: smaller;" title="including as many details as possible.">
+                        including as many details as possible.
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <span class=" btn-primary p-1 rounded" style="font-size: smaller;">High</span>
+                      <span class="btn-secondary  p-1 rounded" style="font-size: smaller;">Feature</span>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6">
+          <div class="panel panel-inverse">
+            <div class="panel-heading">
+              <h4 class="panel-title">Done (<span id="done-tasks-count">4</span>)</h4>
+            </div>
+            <div class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="done-tasks">
+              <!-- DONE TASKS HERE -->
+              <button class="btn d-flex justify-content-center align-items-start border">
+                <div class="d-flex justify-content-center align-items-center"
+                  style="display: flex; justify-content:space-around; gap:20px;">
+                  <div class="">
+                    <i class="fa-regular fa-circle-check" style="color: #05a777;"></i>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center align-items-start">
+                    <div class="fs-6">Describe steps to reproduce an issue</div>
+                    <div class=" text d-flex flex-column justify-content-center align-items-start">
+                      <div class="text text-secondary" style="font-size: smaller;">#6 created in 2022-10-08</div>
+                      <div class="text" style="font-size: smaller;" title="including as many details as possible.">
+                        including as many details as possible.
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <span class=" btn-primary p-1 rounded" style="font-size: smaller;">High</span>
+                      <span class="btn-secondary  p-1 rounded" style="font-size: smaller;">Feature</span>
+                    </div>
+                  </div>
+                </div>
+              </button>
+              <button class="btn d-flex justify-content-center align-items-start border">
+                <div class="d-flex justify-content-center align-items-center"
+                  style="display: flex; justify-content:space-around; gap:20px;">
+                  <div class="">
+                    <i class="fa-regular fa-circle-check" style="color: #05a777;"></i>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center align-items-start">
+                    <div class="fs-6">Describe steps to reproduce an issue</div>
+                    <div class=" text d-flex flex-column justify-content-center align-items-start">
+                      <div class="text text-secondary" style="font-size: smaller;">#6 created in 2022-10-08</div>
+                      <div class="text" style="font-size: smaller;" title="including as many details as possible.">
+                        including as many details as possible.
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <span class=" btn-primary p-1 rounded" style="font-size: smaller;">High</span>
+                      <span class="btn-secondary  p-1 rounded" style="font-size: smaller;">Feature</span>
+                    </div>
+                  </div>
+                </div>
+              </button>
+              <button class="btn d-flex justify-content-center align-items-start border">
+                <div class="d-flex justify-content-center align-items-center"
+                  style="display: flex; justify-content:space-around; gap:20px;">
+                  <div class="">
+                    <i class="fa-regular fa-circle-check" style="color: #05a777;"></i>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center align-items-start">
+                    <div class="fs-6">Describe steps to reproduce an issue</div>
+                    <div class=" text d-flex flex-column justify-content-center align-items-start">
+                      <div class="text text-secondary" style="font-size: smaller;">#6 created in 2022-10-08</div>
+                      <div class="text" style="font-size: smaller;" title="including as many details as possible.">
+                        including as many details as possible.
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <span class=" btn-primary p-1 rounded" style="font-size: smaller;">High</span>
+                      <span class="btn-secondary  p-1 rounded" style="font-size: smaller;">Feature</span>
+                    </div>
+                  </div>
+                </div>
+              </button>
+              <button class="btn d-flex justify-content-center align-items-start border">
+                <div class="d-flex justify-content-center align-items-center"
+                  style="display: flex; justify-content:space-around; gap:20px;">
+                  <div class="">
+                    <i class="fa-regular fa-circle-check" style="color: #05a777;"></i>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center align-items-start">
+                    <div class="fs-6">Describe steps to reproduce an issue</div>
+                    <div class=" text d-flex flex-column justify-content-center align-items-start">
+                      <div class="text text-secondary" style="font-size: smaller;">#6 created in 2022-10-08</div>
+                      <div class="text" style="font-size: smaller;" title="including as many details as possible.">
+                        including as many details as possible.
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <span class=" btn-primary p-1 rounded" style="font-size: smaller;">High</span>
+                      <span class="btn-secondary  p-1 rounded" style="font-size: smaller;">Feature</span>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END #content -->
+
+    <!-- BEGIN scroll-top-btn -->
+    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i
+        class="fa fa-angle-up"></i></a>
+    <!-- END scroll-top-btn -->
+  </div>
+  <!-- END #app -->
+
+  <!-- TASK MODAL -->
+  <div class="modal" id="modal-task">
+    <!-- Modal content goes here -->
+    <div class="modal-content w-auto flex-column jus justify-content-center gap-3 p-3 ">
+      <!-- partie header -->
+      <div class="d-flex border-bottom justify-content-between justify-content-center align-items-center ">
+        <h6>Add Task</h6>
+        <button type="button" id="close-btnClose" class="close-btn border fs-bold border-0 rounded bg-none"> X </button>
+      </div>
+      <!--end partie header -->
+      <!-- partie form -->
+      <div id="form-modal ">
+        <form action="">
+          <div class="title-input-form d-flex flex-column mb-2">
+            <label for="title">Title <span style="color: red;">*</span></label>
+            <input type="text" class="input-title" id="title" style="height: 2rem;">
+            <span id="titelerror" style="display: none;"> Please add a title</span>
+          </div>
+          <div class="radiobt-form d-flex gap-1 mb-3 flex-column">
+            <label>Type<span style="color: red;">*</span></label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Feature
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+              <label class="form-check-label" for="flexRadioDefault2">
+                bug
+              </label>
+            </div>
+            <span id="radiobtn-error" style="display: none;"> check please</span>
+          </div>
+          <div>
+            <div class="select-Priority mb-3 d-flex flex-column">
+              <label for="priority">Priority<span style="color: red;">*</span></label>
+              <select name="priority" id="priority" style="height: 2rem; width: 20rem;" class="priority-section ">
+                <option>Please select</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Critical">Critical</option>
+              </select>
+              <span id="priority-error" style="display: none;"> seclect a priority </span>
+
+            </div>
+            <div class="select-status d-flex mb-3 flex-column">
+              <label for="status">Status<span style="color: red;">*</span></label>
+              <select name="status" id="status" style="height: 2rem;">
+                <option value="">Please select</option>
+                <option value="To Do">To Do</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Done">Done</option>
+              </select>
+              <span id="status-error" style="display: none;"> select status </span>
+            </div>
+            <div class="select-Date mb-3 d-flex flex-column">
+              <label for="date">Date<span style="color: red;">*</span></label>
+              <input type="date" id="date" style="height: 2rem;" class="input">
+              <span id="date-error" style="display: none;"> date incorrect </span>
+            </div>
+            <div class="textarea d-flex mb-3 flex-column mb-3">
+              <label for="description">Description<span style="color: red;">*</span></label>
+              <textarea name="description" id="description" class="form-control input-group-lg"
+                aria-label="With textarea"></textarea>
+              <span id="description-error" style="display: none;"> you forget to add description</span>
+            </div>
+
+          </div>
+          <div class="footer-form d-flex justify-content-end gap-2 align-items-end border-top p-3">
+            <button id="btn-cancel" class="btn btn-cancel task-action-btn">cancel</button>
+            <button type="submit" name="delete" class="btn btn-danger task-action-btn" id="task-delete-btn">Delete</a>
+              <button type="submit" name="update" class="btn btn-warning task-action-btn" id="task-update-btn">Update</a>
+            <button type="submit" id="btn-save" class="btn btn-primary task-action-btn">save</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================== BEGIN core-js ================== -->
+  <script>
+
+
+    /// form validation
+
+    document.getElementById("btn-save").addEventListener("click", function (e) {
+      e.preventDefault();
+      let title = document.getElementById("title").value
+      let formCheckInput = document.getElementsByClassName("form-check-input");
+      let priority = document.getElementById("priority").value
+      let status = document.getElementById("status").value
+      let date = document.getElementById("date").value
+      let description = document.getElementById("description").value
+
+      let errorTitle = document.getElementById("titelerror");
+      let radiobtn = document.getElementById("radiobtn-error");
+      let priorityError = document.getElementById("priority-error");
+      let statusError = document.getElementById("status-error");
+      let dateError = document.getElementById("date-error");
+      let descriptionError = document.getElementById("description-error");
+
+
+      if (title == '') {
+        errorTitle.style.display = "block";
+        errorTitle.style.color = "red";
+      }
+
+      let TypeSelected = false;
+      for (let i = 0; i < formCheckInput.length; i++) {
+        if (formCheckInput[i].checked) {
+          console.log(formCheckInput);
+          TypeSelected = true;
+          break;
+        }
+      }
+      if (!TypeSelected) {
+        radiobtn.style.display = "block";
+        radiobtn.style.color = "red";
+      }
+
+      if (priority == "Please select") {
+        priorityError.style.display = "block";
+        priorityError.style.color = "red";
+      }
+      if (status == "Please select") {
+        statusError.style.display = "block";
+        statusError.style.color = "red";
+
+      }
+
+      let datee = new Date();
+      if (date == '' || date < datee) {
+        dateError.style.display = "block";
+        dateError.style.color = "red";
+
+      }
+      if (description == '') {
+        descriptionError.style.display = "block";
+        descriptionError.style.color = "red";
+
+      }
+
+
+
+
+
+    });
+
+
+
+    ///// button save 
+
+    let tasks = [];
+    
+
+    /// function ajouter
+
+    function addtask()
+    {
+      const task ={
+        
+        title
+
+      }
+    }
+
+
+
+
+  </script>
+
+  <script src="assets/js/script.js"></script>
+  <!-- ================== END core-js ================== -->
+</body>
+
+</html>
