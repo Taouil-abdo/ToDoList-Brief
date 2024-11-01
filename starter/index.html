@@ -20,10 +20,18 @@
       display: none;
       justify-content: center;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       padding: 10px;
       background: #c6c6c6d6;
+    }
+
+    .disable {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .hiddeen {
+      display: none;
     }
   </style>
 </head>
@@ -55,9 +63,10 @@
             <div class="panel-heading">
               <h4 class="panel-title">To do (<span id="to-do-tasks-count">5</span>)</h4>
             </div>
-            <div class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="to-do-tasks">
+            <div class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0"
+              id="task-display-container">
               <!-- TO DO TASKS HERE -->
-              <button class="btn d-flex justify-content-center align-items-start border">
+              <!-- <button class="btn d-flex justify-content-center align-items-start border">
                 <div class="d-flex justify-content-center align-items-center"
                   style="display: flex; justify-content:space-around; gap:20px;">
                   <div class="">
@@ -77,10 +86,11 @@
                     </div>
                   </div>
                 </div>
-              </button>
+              </button> -->
             </div>
           </div>
         </div>
+
         <div class="col-xl-4 col-lg-6">
           <div class="panel panel-inverse">
             <div class="panel-heading">
@@ -356,9 +366,11 @@
           </div>
           <div class="footer-form d-flex justify-content-end gap-2 align-items-end border-top p-3">
             <button id="btn-cancel" class="btn btn-cancel task-action-btn">cancel</button>
-            <button type="submit" name="delete" class="btn btn-danger task-action-btn" id="task-delete-btn">Delete</a>
-              <button type="submit" name="update" class="btn btn-warning task-action-btn" id="task-update-btn">Update</a>
-            <button type="submit" id="btn-save" class="btn btn-primary task-action-btn">save</button>
+            <button type="submit" name="delete" class="btn hiddeen btn-danger task-action-btn"
+              id="task-delete-btn">Delete</a>
+              <button type="submit" name="update" class="btn hiddeen btn-warning task-action-btn"
+                id="task-update-btn">Update</a>
+                <button type="submit" id="btn-save" class="btn disable btn-primary task-action-btn">save</button>
           </div>
 
         </form>
@@ -369,19 +381,18 @@
 
   <!-- ================== BEGIN core-js ================== -->
   <script>
-
-
-    /// form validation
-
     document.getElementById("btn-save").addEventListener("click", function (e) {
       e.preventDefault();
-      let title = document.getElementById("title").value
-      let formCheckInput = document.getElementsByClassName("form-check-input");
-      let priority = document.getElementById("priority").value
-      let status = document.getElementById("status").value
-      let date = document.getElementById("date").value
-      let description = document.getElementById("description").value
 
+      // Get form values
+      let title = document.getElementById("title").value;
+      const type = document.querySelector('input[name="flexRadioDefault"]:checked')?.nextElementSibling.innerText;
+      let priority = document.getElementById("priority").value;
+      let status = document.getElementById("status").value;
+      let date = document.getElementById("date").value;
+      let description = document.getElementById("description").value;
+
+      // Error elements
       let errorTitle = document.getElementById("titelerror");
       let radiobtn = document.getElementById("radiobtn-error");
       let priorityError = document.getElementById("priority-error");
@@ -389,70 +400,99 @@
       let dateError = document.getElementById("date-error");
       let descriptionError = document.getElementById("description-error");
 
-
-      if (title == '') {
+      // Validation
+      let isValid = true;
+      if (title === '') {
         errorTitle.style.display = "block";
         errorTitle.style.color = "red";
+        isValid = false;
       }
-
-      let TypeSelected = false;
-      for (let i = 0; i < formCheckInput.length; i++) {
-        if (formCheckInput[i].checked) {
-          console.log(formCheckInput);
-          TypeSelected = true;
-          break;
-        }
-      }
-      if (!TypeSelected) {
+      if (!type) {
         radiobtn.style.display = "block";
         radiobtn.style.color = "red";
+        isValid = false;
       }
-
-      if (priority == "Please select") {
+      if (priority === "Please select") {
         priorityError.style.display = "block";
         priorityError.style.color = "red";
+        isValid = false;
       }
-      if (status == "Please select") {
+      if (status === "Please select") {
         statusError.style.display = "block";
         statusError.style.color = "red";
-
+        isValid = false;
       }
-
       let datee = new Date();
-      if (date == '' || date < datee) {
+      if (date === '' || new Date(date) < datee) {
         dateError.style.display = "block";
         dateError.style.color = "red";
-
+        isValid = false;
       }
-      if (description == '') {
+      if (description === '') {
         descriptionError.style.display = "block";
         descriptionError.style.color = "red";
-
+        isValid = false;
       }
 
+      // let btnSave =document.getElementById("btn-save");
+      // if(isValid === false)
+      // {
+      //   btnSave.setAttribute = "disabled";
+      // }
 
+      // Create an object for the new task
+      const taskData = {
 
+        title,
+        type,
+        priority,
+        status,
+        date,
+        description
+      };
 
+      const tasks = JSON.parse(localStorage.getItem("tasks"));
 
+      tasks.push(taskData);
+
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+
+      alert("Task saved successfully!");
+      displayTasks();
     });
 
+    function displayTasks() {
+      const savedTasks = JSON.parse(localStorage.getItem("tasks"));
 
+      const taskContainer = document.querySelector("#task-display-container");
+      taskContainer.innerHTML = "";
 
-    ///// button save 
+      savedTasks.forEach((task, index) => {
 
-    let tasks = [];
-    
-
-    /// function ajouter
-
-    function addtask()
-    {
-      const task ={
-        
-        title
-
-      }
+        const taskHtml = `
+      <button class="btn d-flex justify-content-center align-items-start border">
+        <div class="d-flex justify-content-center align-items-center gap-3">
+          <div><i class="fa-regular fa-circle-question" style="color: #05a777;"></i></div>
+          <div class="d-flex flex-column justify-content-center align-items-start">
+            <div class="fs-6">${task.title}</div>
+            <div class="text text-secondary" style="font-size: smaller;">#${index + 1} created on ${task.date}</div>
+            <div class="text" style="font-size: smaller;" title="${task.description}">
+              ${task.description}
+            </div>
+            <div class="mt-2">
+              <span class="btn-primary p-1 rounded" style="font-size: smaller;">${task.priority}</span>
+              <span class="btn-secondary p-1 rounded" style="font-size: smaller;">${task.type}</span>
+            </div>
+          </div>
+        </div>
+      </button>
+    `;
+        taskContainer.innerHTML += taskHtml;
+      });
     }
+
+    // Call displayTasks on page load to show saved tasks
+    window.onload = displayTasks;
 
 
 
