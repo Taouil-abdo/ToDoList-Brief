@@ -1,131 +1,79 @@
-/////moda
 
-let task = document.getElementById("modal-task");
+// global variables
+
+let taskk = document.getElementById("modal-task");
+let hiddeenbtn = document.querySelectorAll(".hiddeen");
+let btnSave = document.querySelector("#btn-save");
+let TaskIndex = null;
 
 /// button add task for show the modal form
 
 document.getElementById("AddTasck").addEventListener("click", function () {
-
-  if (task.style.display = "none") {
-    task.style.display = "flex";
-  }
+  taskk.style.display = "flex";
 });
 
 /// button close
 document.getElementById("close-btnClose").addEventListener("click", function () {
-
-  if (task.style.display = "flex") {
-    task.style.display = "none";
-
-  }
+  taskk.style.display = "none";
 });
 
+// button deleteTask
+document.getElementById("btn-delete").addEventListener("click", function () {
+  deleteTask(TaskIndex);
+});
+
+// button updateTask
+
+document.getElementById("btn-update").addEventListener("click", function () {
+  updateTask(TaskIndex);
+});
+
+function clicktaskModal(index) {
+  TaskIndex = index; // selected index of the task
+
+  // Populate the modal with task details
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const task = tasks[index];
+
+  document.getElementById("title").value = task.title;
+  document.getElementById("priority").value = task.priority;
+  document.getElementById("status").value = task.status;
+  document.getElementById("date").value = task.date;
+  document.getElementById("description").value = task.description;
+
+  // Display hidden buttons in the modal and 
+  //  display modal 
+  taskk.style.display = "flex";
+  // Display hidden buttons update and delete
+  for (let i = 0; i < hiddeenbtn.length; i++) {
+    hiddeenbtn[i].style.display = "block";
+  }
+  // hide the save button
+  btnSave.style.display = "none";
+}
 
 
-/// form validation
 
 
-// document.getElementById("btn-save").addEventListener("click", function (e) {
-//   e.preventDefault();
-//   let title = document.getElementById("title").value
-//   let formCheckInput = document.getElementsByClassName("form-check-input");
-//   let priority = document.getElementById("priority").value
-//   let status = document.getElementById("status").value
-//   let date = document.getElementById("date").value
-//   let description = document.getElementById("description").value
-
-//   let errorTitle = document.getElementById("titelerror");
-//   let radiobtn = document.getElementById("radiobtn-error");
-//   let priorityError = document.getElementById("priority-error");
-//   let statusError = document.getElementById("status-error");
-//   let dateError = document.getElementById("date-error");
-//   let descriptionError = document.getElementById("description-error");
 
 
-//   if (title == '') {
-//     errorTitle.style.display = "block";
-//     errorTitle.style.color = "red";
-//   }
-
-//   let TypeSelected = false;
-//   for (let i = 0; i < formCheckInput.length; i++) {
-//     if (formCheckInput[i].checked) {
-//       TypeSelected = true;
-//       break;
-//     }
-//   }
-//   if (!TypeSelected) {
-//     radiobtn.style.display = "block";
-//     radiobtn.style.color = "red";
-//   }
-
-//   if (priority == "Please select") {
-//     priorityError.style.display = "block";
-//     priorityError.style.color = "red";
-//   }
-//   if (status == "Please select") {
-//     statusError.style.display = "block";
-//     statusError.style.color = "red";
-
-//   }
-
-//   let datee = new Date();
-//   if (date == '' || date < datee) {
-//     dateError.style.display = "block";
-//     dateError.style.color = "red";
-
-//   }
-//   if (description == '') {
-//     descriptionError.style.display = "block";
-//     descriptionError.style.color = "red";
-
-//   }
-
-//   // Create an object for the task
-//   const taskData = {
-//     title,
-//     type,
-//     priority,
-//     status,
-//     date,
-//     description
-//   };
-
-//   // Store task data in localStorage
-//   localStorage.setItem("taskData", JSON.stringify(taskData));
-//   alert("Task saved successfully!");
-
-//   // Call function to display the task
-//   displayTask();
+// let inProgressTasks = document.getElementById("in-progress-tasks");
+// let draggable = document.querySelector(".test");
+// draggable.addEventListener("drag", function() {
+//     console.log("Dragging the box!");
 // });
 
-// Function to display task data in the specified format
-// function displayTask() {
-//   const savedData = JSON.parse(localStorage.getItem("taskData"));
-//   if (!savedData) return;
+// // Drop event
+// inProgressTasks.addEventListener("dragover", function(event) {
+//     event.preventDefault(); // Allow drop
+// });
 
-//   // Target container to display task (adjust selector as needed)
-//   const taskContainer = document.querySelector("#task-display-container");
-//   taskContainer.innerHTML += `
-  
-//     <button class="btn d-flex justify-content-center align-items-start border">
-//       <div class="d-flex justify-content-center align-items-center gap-3">
-//         <div><i class="fa-regular fa-circle-question" style="color: #05a777;"></i></div>
-//         <div class="d-flex flex-column justify-content-center align-items-start">
-//           <div class="fs-6">${savedData.description}</div>
-//           <div class="text text-secondary" style="font-size: smaller;">#6 created on ${savedData.date}</div>
-//           <div class="text" style="font-size: smaller;" title="${savedData.description}">
-//             ${savedData.description}
-//           </div>
-//           <div class="mt-2">
-//             <span class="btn-primary p-1 rounded" style="font-size: smaller;">${savedData.priority}</span>
-//             <span class="btn-secondary p-1 rounded" style="font-size: smaller;">${savedData.type}</span>
-//           </div>
-//         </div>
-//       </div>
-//     </button>
-//   `;
-// }
+// inProgressTasks.addEventListener("drop", function(event) {
+//     event.preventDefault(); // Prevent default behavior
+//     const x = event.clientX - inProgressTasks.offsetLeft;
+//     const y = event.clientY - inProgressTasks.offsetTop;
+//     draggable.style.left = x + 'px';
+//     draggable.style.top = y + 'px';
 
-// // Call displayTask on page load to show saved task data
-// window.onload = displayTask;
+// });
+
