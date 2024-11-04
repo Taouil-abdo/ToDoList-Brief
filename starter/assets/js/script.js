@@ -32,7 +32,7 @@ function clicktaskModal(index) {
   TaskIndex = index; // selected index of the task
 
   // Populate the modal with task details
-  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const tasks = JSON.parse(localStorage.getItem("tasks"))|| [];
   const task = tasks[index];
 
   document.getElementById("title").value = task.title;
@@ -51,10 +51,6 @@ function clicktaskModal(index) {
   // hide the save button
   btnSave.style.display = "none";
 }
-
-
-
-
 
 
 // let inProgressTasks = document.getElementById("in-progress-tasks");

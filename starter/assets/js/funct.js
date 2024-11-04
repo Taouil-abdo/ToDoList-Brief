@@ -149,7 +149,7 @@ function displayTasks() {
       description
     };
   
-    const tasks = JSON.parse(localStorage.getItem("tasks"));
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [] ;
     tasks.push(taskData);
     localStorage.setItem("tasks", JSON.stringify(tasks));
   
