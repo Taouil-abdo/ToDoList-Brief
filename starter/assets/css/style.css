@@ -8,3 +8,16 @@
     background-size: 360px;
     background-position: right bottom;
 }
+
+.modal {
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: #c6c6c6d6;
+  }
+
+  .hiddeen {
+    display: none;
+  }
